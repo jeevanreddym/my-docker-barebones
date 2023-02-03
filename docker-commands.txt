@@ -1,0 +1,41 @@
+# install docker (docker desktop) on the system & run the commands.
+
+# Docker Containerizes a Process.
+Docker uses Linux containerization features.
+
+C:\Users\test>docker pull alpine sh
+-it (--interactive --terminal), sh (shell)
+
+docker run cmd extracts contents of an image(zip/tar file) to create a container.
+C:\Users\test>docker run -it alpine sh
+
+C:\Users\test>docker ps -a
+
+# Connecting to a running container using exec cmd.
+C:\Users\test>docker exec -it 44b72e8afcf1 sh
+
+# Running mysql container & connecting to it to do SQL operations.
+C:\Users\test>docker run -it -d -e MYSQL_ROOT_PASSWORD=secret mysql
+-d (detached mode for process), -e (environment variables)
+
+# passing external file system reference to a jdk container using -v(volume) option.
+PS C:\Users\test> docker run --rm -it -v ${PWD}:/my-folder/ZZ-Temp openjdk sh
+-v (volume), --rm (remove container when stopped)
+
+# Starting nginx web server & mapping host port to container port using -p(port) option.
+PS C:\Users\test> docker run -p 8080:80 nginx
+-p (mapping host & container ports)
+
+PS C:\Users\test> cd .\my-folder\ZZ-Temp\
+
+start nginx web server, expose the port & copy web content to nginx's /usr/share/nginx/html folder (it expects here).
+PS C:\Users\test\my-folder\ZZ-Temp> docker run -p 8080:80 -v ${PWD}:/usr/share/nginx/html nginx
+
+
+# Create a Docker image using the Dockerfile & the build cmd. -t (tag name) & "." is the current directory where to find the Dockedfile.
+![img.png](Z-Imgs/img1.png)
+![img.png](Z-Imgs/img2.png)
+
+# Dockerfile commands:
+![img.png](Z-Imgs/img3.png)
+
