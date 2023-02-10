@@ -1,3 +1,5 @@
+# Docker, Kubernetes, Google Cloud Platform (GCP), Jenkins
+
 # install docker (docker desktop) on the system & run the commands.
 
 # Docker Containerizes a Process.
@@ -200,4 +202,120 @@ PS C:\Users\test\my-folder\ZZ-Temp> docker run -p 8080:80 -v ${PWD}:/usr/share/n
 
 # Dockerfile commands:
 ![img.png](Z-Imgs/img3.png)
+
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> docker tag my-docker-learn:0.0.3-SNAPSHOT g1rocks/my-docker-learn:0.0.3-SNAPSHOT  
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> docker push g1rocks/my-docker-learn:0.0.3-SNAPSHOT
+    The push refers to repository [docker.io/g1rocks/my-docker-learn]
+
+
+
+
+
+# Kubernetes (K8S):
+------------------------
+Kubernetes on Cloud:
+    AKS - Azure K8S Service
+    Amazon EKS - Elastic K8S Service
+    GKE - Google K8S Engine
+
+# responsibilities of kubernetes:
+1) Manage Workloads,
+2) Provide external access to Workloads,
+3) enable scaling,
+4) enable zero downtime deployments.
+
+# kubernetes Pod's: smallest deployable unit in kubernetes.
+
+
+# Kubernetes cmd's:
+--------------------
+
+# kubectl create deployment -> creates kubernetes deployment, replicaset & pod.
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl create deployment my-docker-learn --image=my-docker-learn:0.0.3-SNAPSHOT
+=> kubectl create deployment my-k8s-learn --image=g1rocks/my-docker-learn:0.0.3-SNAPSHOT
+    deployment.apps/my-docker-learn created
+
+# kubectl expose deployment -> creates kubernetes service.
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl expose deployment my-docker-learn --type=LoadBalancer --port=9001
+    service/my-docker-learn exposed
+
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl scale deployment my-docker-learn --replicas=3
+    deployment.apps/my-docker-learn scaled
+
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl delete pod my-docker-learn-5b10553e3df206ef760d5c6f87e2b28ad656a6797c91dfc404a77a9c095300a4
+    Error from server (NotFound): pods "my-docker-learn-5b10553e3df206ef760d5c6f87e2b28ad656a6797c91dfc404a77a9c095300a4" not found
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl delete pod k8s_POD_my-docker-learn-76487f66cb-hl4wq_default_a4759b02-47e3-435c-86a8-7f9ba3ea2a46_0
+    Error from server (NotFound): pods "k8s_POD_my-docker-learn-76487f66cb-hl4wq_default_a4759b02-47e3-435c-86a8-7f9ba3ea2a46_0" not found
+
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl autoscale deployment my-docker-learn --max=10 --cpu-percent=70
+    horizontalpodautoscaler.autoscaling/my-docker-learn autoscaled
+
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl get deployments
+    NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+    my-docker-learn-kube   0/1     1            0           8h
+
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl delete deployments my-docker-learn
+    deployment.apps "my-docker-learn" deleted
+
+# update the version of image                                                     <deployment-name> <container-name> <new-image:tag>
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl set image deployment my-docker-learn my-docker-learn=my-docker-learn:NEW_VERSION   
+    
+
+
+# Google Cloud Platform (GCP):
+------------------------------
+
+https://cloud.google.com/
+![img.png](Z-Imgs/img4.png)
+
+https://console.cloud.google.com/
+![img.png](Z-Imgs/img5.png)
+![img.png](Z-Imgs/img6.png)
+![img.png](Z-Imgs/img7.png)
+![img.png](Z-Imgs/img8.png)
+
+
+
+# Jenkins:
+---------------
+Automation platforms that allows to build, test & deploy s/w using pipelines.
+Can be used to automate any task. Run bash, python scripts or run Ansible playbooks.
+Jenkins provides web GUI where jobs can be created & customised functionality as required -> 
+-> Source Control Management,
+-> Pre & Post build actions,
+-> build Triggers
+which allows running Tasks on demand by using GUI or trigger automatically via web hooks.
+
+=> Jenkins Infrastructure:
+----------------------------
+Master Server: 
+    -> Controls Pipelines
+    -> Schedules Builds to Agent's
+Agents: (work horses that run the actual builds)
+    -> Perform the Build (in their workspace).
+    -> 2 Categories (Agent Types):
+        -> Permanent Agents (dedicated servers for running jobs) 
+            => standalone Linux/Windows servers configured to run Jenkins jobs 
+            => require jdk setup 
+            => ssh setup as Master server communicates using ssh
+            => build tools (maven, gradle) are installed                        
+        -> Cloud Agents (Cloud/Dynamic agents spun up on demand)
+            => Docker, Kubernetes, AWS (EC2 instances)
+
+-> Build Types
+    => Freestyle build: like shell scripts run on a server by specific events  
+    => Pipelines: use Jenkin files written in Groovy syntax to specify what happens during the build
+        -> broken down into different stages (components of build)
+       ![img.png](Z-Imgs/img9.png) 
+
+
+
+
+
+    
+
+
+
+
+
 

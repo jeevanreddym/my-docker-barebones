@@ -3,12 +3,14 @@
 # Docker Containerizes a Process.
 Docker uses Linux containerization features.
 
+# download image from hub.docker.com
 C:\Users\test>docker pull alpine sh
 -it (--interactive --terminal), sh (shell)
 
-docker run cmd extracts contents of an image(zip/tar file) to create a container.
+# docker run cmd extracts contents of an image(zip/tar file) to create a container.
 C:\Users\test>docker run -it alpine sh
 
+# list all docker processes & their statuses.
 C:\Users\test>docker ps -a
 
 # Connecting to a running container using exec cmd.
@@ -26,16 +28,34 @@ PS C:\Users\test> docker run --rm -it -v ${PWD}:/my-folder/ZZ-Temp openjdk sh
 PS C:\Users\test> docker run -p 8080:80 nginx
 -p (mapping host & container ports)
 
-PS C:\Users\test> cd .\my-folder\ZZ-Temp\
-
-start nginx web server, expose the port & copy web content to nginx's /usr/share/nginx/html folder (it expects here).
+# start nginx web server, expose the port & copy web content to nginx's /usr/share/nginx/html folder (it expects here).
 PS C:\Users\test\my-folder\ZZ-Temp> docker run -p 8080:80 -v ${PWD}:/usr/share/nginx/html nginx
 
-
 # Create a Docker image using the Dockerfile & the build cmd. -t (tag name) & "." is the current directory where to find the Dockedfile.
-![img.png](Z-Imgs/img1.png)
-![img.png](Z-Imgs/img2.png)
+PS C:\Users\test\my-folder\Workspaces\my-docker-barebones> docker build -t my-docker-barebones-image .
+-t (tag name),  . is the current directory where to find the Dockedfile
+
+# build command
+./mvnw spring-boot:build-image
+
+# list all docker images downloaded to PC.
+PS C:\Users\test\my-folder\Workspaces\my-docker-barebones> docker images
+
+# push from local to remote docker repo.
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> docker tag my-docker-learn:0.0.3-SNAPSHOT g1rocks/my-docker-learn:0.0.3-SNAPSHOT
+PS C:\Users\test\my-folder\Workspaces\my-docker-learn> docker push g1rocks/my-docker-learn:0.0.3-SNAPSHOT
+    The push refers to repository [docker.io/g1rocks/my-docker-learn]
+
 
 # Dockerfile commands:
-![img.png](Z-Imgs/img3.png)
+FROM <image-name>
+RUN <command'(s)>
+MAINTAINER <project/dockerfile maintainer name/email>
+ENV <environment variables -> key value pairs>
+EXPOSE <port number>
+WORKDIR <docker container base work directory>
+COPY <source> <destination>
+CMD <>
+ENTRYPOINT <>
+
 
