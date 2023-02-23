@@ -32,19 +32,35 @@ PS C:\Users\test> docker run -p 8080:80 nginx
 PS C:\Users\test\my-folder\ZZ-Temp> docker run -p 8080:80 -v ${PWD}:/usr/share/nginx/html nginx
 
 # Create a Docker image using the Dockerfile & the build cmd. -t (tag name) & "." is the current directory where to find the Dockedfile.
-PS C:\Users\test\my-folder\Workspaces\my-docker-barebones> docker build -t my-docker-barebones-image .
+PS C:\my-docker-barebones> docker build -t my-docker-barebones-image .
 -t (tag name),  . is the current directory where to find the Dockedfile
 
 # build command
 ./mvnw spring-boot:build-image
 
 # list all docker images downloaded to PC.
-PS C:\Users\test\my-folder\Workspaces\my-docker-barebones> docker images
+PS C:\my-docker-barebones> docker images
 
 # push from local to remote docker repo.
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> docker tag my-docker-learn:0.0.3-SNAPSHOT g1rocks/my-docker-learn:0.0.3-SNAPSHOT
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> docker push g1rocks/my-docker-learn:0.0.3-SNAPSHOT
-    The push refers to repository [docker.io/g1rocks/my-docker-learn]
+PS C:\my-springboot-basics> docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: g1rocks
+Password:
+Login Succeeded
+
+Logging in with your password grants your terminal complete access to your account.
+For better security, log in with a limited-privilege personal access token. Learn more at https://docs.docker.com/go/access-tokens/
+
+PS C:\my-springboot-basics> docker tag my-springboot-basics:0.0.1-SNAPSHOT g1rocks/my-springboot-basics:0.0.1-SNAPSHOT
+PS C:\my-springboot-basics> docker push g1rocks/my-springboot-basics:0.0.1-SNAPSHOT
+The push refers to repository [docker.io/g1rocks/my-springboot-basics]
+1dc94a70dbaa: Preparing
+e94cf9a9bed9: Preparing
+200fe3387305: Pushed
+30a03cb7ff3f: Mounted from g1rocks/my-docker-learn
+0.0.1-SNAPSHOT: digest: sha256:79bbacad57e66ae4eb44505e36d4b279a3a6e27302704df47ea229e0c0d6ba66 size: 5327
+
+
 
 
 # Dockerfile commands:
