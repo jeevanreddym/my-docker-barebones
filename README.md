@@ -203,8 +203,8 @@ PS C:\Users\test\my-folder\ZZ-Temp> docker run -p 8080:80 -v ${PWD}:/usr/share/n
 # Dockerfile commands:
 ![img.png](Z-Imgs/img3.png)
 
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> docker tag my-docker-learn:0.0.3-SNAPSHOT g1rocks/my-docker-learn:0.0.3-SNAPSHOT  
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> docker push g1rocks/my-docker-learn:0.0.3-SNAPSHOT
+PS C:\my-docker-learn> docker tag my-docker-learn:0.0.3-SNAPSHOT g1rocks/my-docker-learn:0.0.3-SNAPSHOT  
+PS C:\my-docker-learn> docker push g1rocks/my-docker-learn:0.0.3-SNAPSHOT
     The push refers to repository [docker.io/g1rocks/my-docker-learn]
 
 
@@ -231,34 +231,34 @@ Kubernetes on Cloud:
 --------------------
 
 # kubectl create deployment -> creates kubernetes deployment, replicaset & pod.
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl create deployment my-docker-learn --image=my-docker-learn:0.0.3-SNAPSHOT
+PS C:\my-docker-learn> kubectl create deployment my-docker-learn --image=my-docker-learn:0.0.3-SNAPSHOT
 => kubectl create deployment my-k8s-learn --image=g1rocks/my-docker-learn:0.0.3-SNAPSHOT
     deployment.apps/my-docker-learn created
 
 # kubectl expose deployment -> creates kubernetes service.
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl expose deployment my-docker-learn --type=LoadBalancer --port=9001
+PS C:\my-docker-learn> kubectl expose deployment my-docker-learn --type=LoadBalancer --port=9001
     service/my-docker-learn exposed
 
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl scale deployment my-docker-learn --replicas=3
+PS C:\my-docker-learn> kubectl scale deployment my-docker-learn --replicas=3
     deployment.apps/my-docker-learn scaled
 
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl delete pod my-docker-learn-5b10553e3df206ef760d5c6f87e2b28ad656a6797c91dfc404a77a9c095300a4
+PS C:\my-docker-learn> kubectl delete pod my-docker-learn-5b10553e3df206ef760d5c6f87e2b28ad656a6797c91dfc404a77a9c095300a4
     Error from server (NotFound): pods "my-docker-learn-5b10553e3df206ef760d5c6f87e2b28ad656a6797c91dfc404a77a9c095300a4" not found
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl delete pod k8s_POD_my-docker-learn-76487f66cb-hl4wq_default_a4759b02-47e3-435c-86a8-7f9ba3ea2a46_0
+PS C:\my-docker-learn> kubectl delete pod k8s_POD_my-docker-learn-76487f66cb-hl4wq_default_a4759b02-47e3-435c-86a8-7f9ba3ea2a46_0
     Error from server (NotFound): pods "k8s_POD_my-docker-learn-76487f66cb-hl4wq_default_a4759b02-47e3-435c-86a8-7f9ba3ea2a46_0" not found
 
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl autoscale deployment my-docker-learn --max=10 --cpu-percent=70
+PS C:\my-docker-learn> kubectl autoscale deployment my-docker-learn --max=10 --cpu-percent=70
     horizontalpodautoscaler.autoscaling/my-docker-learn autoscaled
 
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl get deployments
+PS C:\my-docker-learn> kubectl get deployments
     NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
     my-docker-learn-kube   0/1     1            0           8h
 
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl delete deployments my-docker-learn
+PS C:\my-docker-learn> kubectl delete deployments my-docker-learn
     deployment.apps "my-docker-learn" deleted
 
 # update the version of image                                                     <deployment-name> <container-name> <new-image:tag>
-PS C:\Users\test\my-folder\Workspaces\my-docker-learn> kubectl set image deployment my-docker-learn my-docker-learn=my-docker-learn:NEW_VERSION   
+PS C:\my-docker-learn> kubectl set image deployment my-docker-learn my-docker-learn=my-docker-learn:NEW_VERSION   
     
 
 
